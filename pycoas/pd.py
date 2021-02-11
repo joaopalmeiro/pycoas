@@ -2,9 +2,10 @@ import numpy as np
 import pandas as pd
 
 
-def reduce_memory_usage(df, verbose=True):
+def reduce_memory_usage(df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
     numerics = ["int16", "int32", "int64", "float16", "float32", "float64"]
     start_mem = df.memory_usage().sum() / 1024 ** 2
+
     for col in df.columns:
         col_type = df[col].dtypes
         if col_type in numerics:
@@ -45,7 +46,7 @@ def reduce_memory_usage(df, verbose=True):
     return df
 
 
-def show_unique_values(df):
+def show_unique_values(df: pd.DataFrame):
     object_cols = list(df.select_dtypes(include=["object"]).columns)
     unique_counts = pd.DataFrame.from_records(
         [(col, df[col].nunique()) for col in df.columns],
@@ -70,7 +71,7 @@ def show_unique_values(df):
     unique_object_counts = (
         unique_object_counts.style.hide_index()
         .bar("#_Unique", color="lightblue", align="zero")
-        .set_caption("Object oolumns")
+        .set_caption("Object columns")
     )
 
     return display(unique_counts, unique_object_counts)
