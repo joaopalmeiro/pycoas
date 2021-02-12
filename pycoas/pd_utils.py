@@ -23,7 +23,7 @@ def show_unique_values(df: pd.DataFrame, verbose: bool = True) -> Tuple[Styler, 
             )
         )
 
-    # `vmin`: When `None`, the minimum value of the data will be used.
+    # `vmin`: when `None`, the minimum value of the data will be used.
     unique_counts = (
         unique_counts.style.hide_index()
         .bar("#_Unique", color="lightblue", align="left", vmin=0)
